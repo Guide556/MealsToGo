@@ -2,6 +2,24 @@ import * as React from "react"; //เรียกใช้ React
 import { StyleSheet, View, SafeAreaView, StatusBar } from "react-native";
 import { Searchbar } from "react-native-paper";
 import { RestaurantInfoCard } from "../components/restaurant-info-card.component";
+import styled from 'styled-components/native'
+
+// $ ใส่เพื่อให้รู้ว่าเป็น code js
+const SafeArea = styled.SafeAreaView
+`flex: 1;
+marginTop: ${StatusBar.currentHeight}px; 
+background-color: ${"#F1C98B"};`
+
+const SearchContainer = styled.View`
+padding: 16px;
+
+`
+const RestaurantList = styled.View`
+  background-color: ${"#ffffff"};
+  flex: 1;
+  padding: 16px;
+`
+
 
 export const RestaurantsScreen = () => {
 
@@ -10,27 +28,20 @@ export const RestaurantsScreen = () => {
 
   return (
     <>
-      <SafeAreaView
-        style={{
-          flex: 1,
-          marginTop: StatusBar.currentHeight,
-          backgroundColor: "#F1C98B",
-        }}
-      >
-        <View style={styles.search}>
+      <SafeArea>
+        <SearchContainer>
           <Searchbar
             placeholder="Search"
             onChangeText={onChangeSearch}
             value={searchQuery}
           />
-        </View>
+        </SearchContainer>
 
-        <View style={styles.list}>
+        <RestaurantList>
           {/* เรียกใช้มาจาก RestaurantInfoCard */}
           <RestaurantInfoCard />
-        </View>
-
-      </SafeAreaView>
+        </RestaurantList>
+      </SafeArea>
     </>
   );
 }
@@ -46,9 +57,5 @@ const styles = StyleSheet.create({
       backgroundColor: "#ffffff",
       flex: 1,
       padding: 16
-    },
-    search: {
-      // marginTop: 5,
-      padding: 16,
     },
   });
