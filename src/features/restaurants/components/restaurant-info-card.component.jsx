@@ -128,43 +128,6 @@ export const RestaurantInfoCard = ({ ...restaurant }) => {
               <Image style={{ width: 15, height: 15 }} source={{ uri: icon }} />
             </SectionEnd>
           </Section>
-
-          <Address>{address}</Address>
-        </Info>
-      </RestaurantCard>
-
-      {/* Test in classroom*/}
-      <RestaurantCard elevation={5}>
-        <RestaurantCardCover key={name} source={{ uri: photos[1] }} />
-        <Info>
-          <Text variant="label">{name}</Text>
-
-          <Section1>
-            {/* ratingArray.map การวนลูป */}
-            <Rating>
-              {ratingArray.map((_, index) => (
-                <SvgXml key={index} xml={star} width={20} height={20} />
-              ))}
-            </Rating>
-
-            <SectionEnd1>
-              {/* ตั้งเงื่อนไขการแสดง */}
-              {isClosedTemporarily && (
-                <Text variant="error">CLOSE TEMPOLARY</Text>
-              )}
-
-              <Spacer position="left" size="large">
-                {isClosedTemporarily && (
-                  <SvgXml xml={open} width={20} height={20} />
-                )}
-              </Spacer>
-
-              <Spacer position="left" size="large">
-                <Icon source={{ uri: icon }} />
-              </Spacer>
-            </SectionEnd1>
-          </Section1>
-
           <Address>{address}</Address>
         </Info>
       </RestaurantCard>
