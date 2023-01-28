@@ -80,12 +80,14 @@ const Section1 = styled.View`
    justify-content: flex-end;
  `;
 
-export const RestaurantInfoCard = ({ ...restaurant }) => {
+export const RestaurantInfoCard = ({ restaurant = {} }) => {
   const {
     name = "Some Restaurant",
     icon = "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
-    photos = ["https://rerollcdn.com/GENSHIN/Items/NEW2/Victorious_Legend.png",
-              "https://i.pinimg.com/736x/1f/0a/43/1f0a43f2d30ab6b34f9f94f6aefda6a4.jpg"],
+    photos = [
+      "https://rerollcdn.com/GENSHIN/Items/NEW2/Victorious_Legend.png",
+      "https://i.pinimg.com/736x/1f/0a/43/1f0a43f2d30ab6b34f9f94f6aefda6a4.jpg",
+    ],
 
     address = "100 some random street",
     isOpenNow = true,
