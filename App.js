@@ -22,37 +22,10 @@ import { RestaurantsContextProvider } from
 
 import { LocationContextProvider } from "./src/services/location/location.context";
 
-const Tab = createBottomTabNavigator();
+import 'react-native-gesture-handler';
+import { AppNavigator } from "./src/infrastructure/navigation/app.navigator";
 
-const Settings = () => (
-  <SafeArea>
-    <Text>Settings</Text>
-  </SafeArea>
-);
-const Map = () => (
-  <SafeArea>
-    <Text>Map</Text>
-  </SafeArea>
-);
-
-const TAB_ICON = {
-  Restaurants: "md-restaurant",
-  Map: "md-map",
-  Settings: "md-settings",
-};
-
-// Tab Navigater
-const createScreen = ({ route }) => ({
-  tabBarIcon: ({ color, size }) => {
-    let iconName = TAB_ICON[route.name];
- 
-    // You can return any component that you like here!
-    return <Ionicons name={iconName} size={size} color={color} />;
-  },
-  tabBarActiveTintColor: "tomato",
-  tabBarInactiveTintColor: "gray",
-  headerShown: false
-})
+import { Navigation } from "./src/infrastructure/navigation";
 
 export default function App() {
 
@@ -75,14 +48,7 @@ export default function App() {
       <ThemeProvider theme={theme}>
         <LocationContextProvider>
           <RestaurantsContextProvider>
-            <NavigationContainer>
-              {/* headerShown: false ไม่แสดงส่วนหัวของ Tab navigator */}
-              <Tab.Navigator screenOptions={createScreen}>
-                <Tab.Screen name="Restaurants" component={RestaurantsScreen} />
-                <Tab.Screen name="Map" component={Map} />
-                <Tab.Screen name="Settings" component={Settings} />
-              </Tab.Navigator>
-            </NavigationContainer>
+          <Navigation/>
           </RestaurantsContextProvider>
         </LocationContextProvider>
       </ThemeProvider>

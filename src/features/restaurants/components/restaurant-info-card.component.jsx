@@ -1,7 +1,7 @@
 import React from "react";
 import { Card } from "react-native-paper";
 import styled from "styled-components/native";
-import { View, Image } from "react-native";
+import { View, Image, TouchableOpacity } from "react-native";
 import { Spacer } from "../../../components/spacer/spacer.component";
 
 import { SvgXml } from "react-native-svg";
@@ -93,6 +93,7 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
     isOpenNow = true,
     rating = 5,
     isClosedTemporarily = true,
+    placeId,
   } = restaurant;
 
   // การสร้างอาร์เรย์เพื่อเก็บจำนวนภาพ star SVG โดยจำนวนภาพที่จะเก็บนั้นอ้างอิงที่ตัวแปร rating ซึ่งมีจำนวนเท่ากับ 5
@@ -108,8 +109,8 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
           <Section>
             {/* ratingArray.map การวนลูป */}
             <Rating>
-              {ratingArray.map((_, index) => (
-                <SvgXml key={index} xml={star} width={20} height={20} />
+              {ratingArray.map((_, i) => (
+                <SvgXml  key={`star-${placeId}-${i}`} xml={star} width={20} height={20} />
               ))}
             </Rating>
 

@@ -1,5 +1,5 @@
 import React, { useState,useContext } from "react"; //เรียกใช้ React
-import { StyleSheet, StatusBar,  FlatList } from "react-native";
+import { StyleSheet, StatusBar,  FlatList, TouchableOpacity } from "react-native";
 import { Searchbar } from "react-native-paper";
 import { RestaurantInfoCard } from "../components/restaurant-info-card.component";
 import styled from 'styled-components/native'
@@ -41,10 +41,10 @@ const RestaurantList = styled(FlatList).attrs({
   },
 })``;
 
-export const RestaurantsScreen = () => {
+export const RestaurantsScreen = ({ navigation }) => {
 
-    const [searchQuery, setSearchQuery] = React.useState("");
-    const onChangeSearch = (query) => setSearchQuery(query);
+    // const [searchQuery, setSearchQuery] = React.useState("");
+    // const onChangeSearch = (query) => setSearchQuery(query);
 
     const { isLoading, error, restaurants } = useContext(RestaurantsContext);
     console.log(error);
@@ -74,9 +74,11 @@ export const RestaurantsScreen = () => {
             data={restaurants}
             renderItem={({ item }) => {
               return (
+                <TouchableOpacity  onPress={() => navigation.navigate("RestaurantDetail",{restaurant: item})}>
                 <Spacer position="bottom" size="large">
                   <RestaurantInfoCard restaurant={item} />
                 </Spacer>
+                </TouchableOpacity>
               );
             }}
             keyExtractor={(item, index) => index}
