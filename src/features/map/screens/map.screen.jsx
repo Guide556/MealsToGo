@@ -14,7 +14,7 @@ const Map = styled(MapView)`
 `;
 
 
-export const MapScreen = () => {
+export const MapScreen = ({ navigation }) => {
   const { location } = useContext(LocationContext);
   const { restaurants = [] } = useContext(RestaurantsContext);
 
@@ -44,7 +44,8 @@ export const MapScreen = () => {
         }}
       >
          {restaurants.map((restaurant) => {
-          return (<Marker
+          return (
+            <Marker
               key={restaurant.name}
               title={restaurant.name}
               coordinate={{
@@ -52,9 +53,15 @@ export const MapScreen = () => {
                 longitude: restaurant.geometry.location.lng,
               }}
             >
-                <Callout>
-                    <MapCallout restaurant={restaurant} />
-                </Callout>
+              <Callout
+                onPress={() =>
+                  navigation.navigate("RestaurantDetail", {
+                    restaurant,
+                  })
+                }
+              >
+                <MapCallout restaurant={restaurant} />
+              </Callout>
             </Marker>
           );
         })}

@@ -1,6 +1,5 @@
 import React, { useState,useContext } from "react"; //เรียกใช้ React
 import { StyleSheet, StatusBar,  FlatList, TouchableOpacity } from "react-native";
-import { Searchbar } from "react-native-paper";
 import { RestaurantInfoCard } from "../components/restaurant-info-card.component";
 import styled from 'styled-components/native'
 
@@ -10,6 +9,8 @@ import { RestaurantsContext } from "../../../services/restaurants/restaurants.co
 import { ActivityIndicator, MD2Colors } from "react-native-paper";
 
 import { Search } from "../components/search.component";
+
+import { FavouritesBar } from "../../../components/favourites/favourites-bar.component";
 
 const LoadingContainer = styled.View`
   position: absolute;
@@ -47,7 +48,8 @@ export const RestaurantsScreen = ({ navigation }) => {
     // const onChangeSearch = (query) => setSearchQuery(query);
 
     const { isLoading, error, restaurants } = useContext(RestaurantsContext);
-    console.log(error);
+    const [isToggled, setIsToggled] = useState(false);
+    // console.log(error);
 
 
   return (
@@ -67,26 +69,32 @@ export const RestaurantsScreen = ({ navigation }) => {
           />
         </SearchContainer> */}
 
-        <Search />
-        
-        <Container>
-          <RestaurantList
-            data={restaurants}
-            renderItem={({ item }) => {
-              return (
-                <TouchableOpacity  onPress={() => navigation.navigate("RestaurantDetail",{restaurant: item})}>
+        <Search
+          isFavouritesToggled={isToggled}
+          onFavouritesToggle={() => setIsToggled(!isToggled)}
+        />
+        {isToggled && <FavouritesBar />}
+
+        <RestaurantList
+          data={restaurants}
+          renderItem={({ item }) => {
+            return (
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate("RestaurantDetail", { restaurant: item })
+                }
+              >
                 <Spacer position="bottom" size="large">
                   <RestaurantInfoCard restaurant={item} />
                 </Spacer>
-                </TouchableOpacity>
-              );
-            }}
-            keyExtractor={(item, index) => index}
-            contentContainerStyle={{ padding: 16 }}
-          />
-          {/* เรียกใช้มาจาก RestaurantInfoCard */}
-          {/* <RestaurantInfoCard /> */}
-        </Container>
+              </TouchableOpacity>
+            );
+          }}
+          keyExtractor={(item, index) => index}
+          contentContainerStyle={{ padding: 16 }}
+        />
+        {/* เรียกใช้มาจาก RestaurantInfoCard */}
+        {/* <RestaurantInfoCard /> */}
       </SafeArea>
     </>
   );
