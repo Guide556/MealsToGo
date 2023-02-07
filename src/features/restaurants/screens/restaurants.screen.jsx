@@ -1,4 +1,4 @@
-import React, { useState,useContext } from "react"; //เรียกใช้ React
+import React, { useState, useContext } from "react"; //เรียกใช้ React
 import { StyleSheet, StatusBar,  FlatList, TouchableOpacity } from "react-native";
 import { RestaurantInfoCard } from "../components/restaurant-info-card.component";
 import styled from 'styled-components/native'
@@ -11,6 +11,8 @@ import { ActivityIndicator, MD2Colors } from "react-native-paper";
 import { Search } from "../components/search.component";
 
 import { FavouritesBar } from "../../../components/favourites/favourites-bar.component";
+
+import { FavouritesContext } from "../../../services/favourites/favourites.context";
 
 const LoadingContainer = styled.View`
   position: absolute;
@@ -27,12 +29,7 @@ padding: 16px;
 
 `
 
-// RestaurantList ของเก่า
-// const RestaurantList = styled.View`
-//   background-color: ${"#ffffff"};
-//   flex: 1;
-//   padding: 8px;
-// `
+
 const Container = styled.View`
 background-color: ${"#ffffff"};
 `
@@ -43,14 +40,10 @@ const RestaurantList = styled(FlatList).attrs({
 })``;
 
 export const RestaurantsScreen = ({ navigation }) => {
-
-    // const [searchQuery, setSearchQuery] = React.useState("");
-    // const onChangeSearch = (query) => setSearchQuery(query);
-
-    const { isLoading, error, restaurants } = useContext(RestaurantsContext);
-    const [isToggled, setIsToggled] = useState(false);
-    // console.log(error);
-
+  const { isLoading, error, restaurants } = useContext(RestaurantsContext);
+  const [isToggled, setIsToggled] = useState(false);
+  const { favourites } = useContext(FavouritesContext);
+  // console.log(error);
 
   return (
     <>
@@ -61,19 +54,17 @@ export const RestaurantsScreen = ({ navigation }) => {
           </LoadingContainer>
         )}
 
-        {/* <SearchContainer>
-          <Searchbar
-            placeholder="Search"
-            onChangeText={onChangeSearch}
-            value={searchQuery}
-          />
-        </SearchContainer> */}
-
         <Search
           isFavouritesToggled={isToggled}
           onFavouritesToggle={() => setIsToggled(!isToggled)}
         />
-        {isToggled && <FavouritesBar />}
+
+        {isToggled && (
+          <FavouritesBar
+            favourites={favourites}
+            onNavigate={navigation.navigate}
+          />
+        )}
 
         <RestaurantList
           data={restaurants}
@@ -98,7 +89,7 @@ export const RestaurantsScreen = ({ navigation }) => {
       </SafeArea>
     </>
   );
-}
+};
 
 const styles = StyleSheet.create({
     container: {
