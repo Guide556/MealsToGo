@@ -1,10 +1,8 @@
-import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { SafeArea } from "../../components/utility/safe-area.component";
 import { Text } from "react-native";
 
-import { RestaurantsScreen } from "../../features/restaurants/screens/restaurants.screen";
 import { RestaurantsNavigator } from "../navigation/restaurants.navigator"
 
 import { Ionicons } from "@expo/vector-icons";
@@ -44,12 +42,10 @@ const createScreenOptions  = ({ route }) => ({
 })
 
 export const AppNavigator = () => (
-    <NavigationContainer>
-      <Tab.Navigator screenOptions={createScreenOptions} headerMode="none">
-        <Tab.Screen name="Restaurants" component={RestaurantsNavigator} />
-        <Tab.Screen name="Map" component={MapScreen} />
-        <Tab.Screen name="Settings" component={Settings} />
-      </Tab.Navigator>
-    </NavigationContainer>
-  );
+  <Tab.Navigator screenOptions={createScreenOptions} headerMode="none">
+    <Tab.Screen name="Restaurants" component={RestaurantsNavigator} />
+    <Tab.Screen name="Map" component={MapScreen} />
+    <Tab.Screen name="Settings" component={Settings} />
+  </Tab.Navigator>
+);
   
