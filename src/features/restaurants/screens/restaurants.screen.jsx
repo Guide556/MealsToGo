@@ -13,6 +13,7 @@ import { Search } from "../components/search.component";
 import { FavouritesBar } from "../../../components/favourites/favourites-bar.component";
 
 import { FavouritesContext } from "../../../services/favourites/favourites.context";
+import { RestaurantList } from "../components/restaurant-list.styles";
 
 const LoadingContainer = styled.View`
   position: absolute;
@@ -33,11 +34,11 @@ padding: 16px;
 const Container = styled.View`
 background-color: ${"#ffffff"};
 `
-const RestaurantList = styled(FlatList).attrs({
-  contentContainerStyle: {
-    padding: 16,
-  },
-})``;
+// const RestaurantList = styled(FlatList).attrs({
+//   contentContainerStyle: {
+//     padding: 16,
+//   },
+// })``;
 
 export const RestaurantsScreen = ({ navigation }) => {
   const { isLoading, error, restaurants } = useContext(RestaurantsContext);
