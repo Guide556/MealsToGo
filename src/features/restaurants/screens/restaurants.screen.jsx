@@ -15,6 +15,8 @@ import { FavouritesBar } from "../../../components/favourites/favourites-bar.com
 import { FavouritesContext } from "../../../services/favourites/favourites.context";
 import { RestaurantList } from "../components/restaurant-list.styles";
 
+import { FadeInView } from "../../../components/animations/fade.animation";
+
 const LoadingContainer = styled.View`
   position: absolute;
   top: 50%;
@@ -77,7 +79,9 @@ export const RestaurantsScreen = ({ navigation }) => {
                 }
               >
                 <Spacer position="bottom" size="large">
-                  <RestaurantInfoCard restaurant={item} />
+                  <FadeInView>
+                    <RestaurantInfoCard restaurant={item} />
+                  </FadeInView>
                 </Spacer>
               </TouchableOpacity>
             );
